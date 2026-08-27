@@ -1,0 +1,71 @@
+# ── Python ──────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Environment / Secrets ───────────────────────────────
+.env
+*.env.local
+
+# ── Database ─────────────────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+
+# ── YOLO / Model weights ─────────────────────────────────
+*.pt
+*.onnx
+weights/
+
+# ── Evidence / clips (never commit raw footage) ──────────
+evidence/
+clips/
+*.mp4.clip
+
+# ── Logs ─────────────────────────────────────────────────
+logs/
+*.log
+
+# ── Alembic (keep ini + versions, ignore compiled) ───────
+alembic/__pycache__/
+
+# ── Node / Frontend ──────────────────────────────────────
+node_modules/
+frontend/dist/
+frontend/build/
+.npm/
+
+# ── Docker ───────────────────────────────────────────────
+.dockerignore.bak
+
+# ── OS files ─────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE ──────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Jupyter ──────────────────────────────────────────────
+.ipynb_checkpoints/
+
+# ── Test video fixtures (mount locally; too large for git) ─
+test.mp4
+test1.mp4
+test3.mp4
+
+.coverage
+htmlcov/
