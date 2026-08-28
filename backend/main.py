@@ -19,6 +19,11 @@ from alembic.config import Config
 from backend.db.database import SessionLocal
 from backend.db.seed import seed_database
 from backend.auth.router import router as auth_router
+from backend.cameras.router import router as cameras_router
+from backend.stream.router import router as stream_router
+from backend.pipeline.source_manager import get_source_manager
+from backend.pipeline.pipeline_manager import get_pipeline_manager
+from backend.db.models import Camera
 
 # ── Logging ─────────────────────────────────────────────────────────────────
 logging.basicConfig(
@@ -43,10 +48,24 @@ async def lifespan(app: FastAPI):
     finally:
         db.close()
 
+    # Register all existing cameras in SourceManager (don't auto-start — operator does that)
+    source_mgr = get_source_manager()
+    db = SessionLocal()
+    try:
+        cameras = db.query(Camera).all()
+        for cam in cameras:
+            source_mgr.add(camera_id=cam.id, source_uri=cam.source_uri)
+        logger.info("Registered %d cameras in SourceManager", len(cameras))
+    finally:
+        db.close()
+
     logger.info("SecureVista backend ready.")
     yield
-    # Shutdown (nothing to clean up yet)
+
+    # Shutdown — stop all pipelines and sources cleanly
     logger.info("SecureVista backend shutting down.")
+    get_pipeline_manager().detach_all()
+    get_source_manager().stop_all()
 
 
 # ── App ──────────────────────────────────────────────────────────────────────
@@ -69,11 +88,11 @@ app.add_middleware(
 
 # ── Routers ──────────────────────────────────────────────────────────────────
 app.include_router(auth_router)
-# Phase 2+ routers will be added here as they are built:
-# app.include_router(cameras_router)
+app.include_router(cameras_router)   # Phase 2
+app.include_router(stream_router)    # Phase 2
+# Phase 3+ routers:
 # app.include_router(incidents_router)
 # app.include_router(zones_router)
-# app.include_router(stream_router)
 # app.include_router(evidence_router)
 
 
