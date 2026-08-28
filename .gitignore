@@ -1,0 +1,55 @@
+# --- Backend (Python) ---
+backend/.venv/
+__pycache__/
+*.pyc
+
+# Runtime state -- local SQLite DB, JWT secret, Ed25519 evidence-signing keys.
+# Never commit these: the keys are what make evidence packages verifiable,
+# and the DB holds this deployment's own users/incidents/audit trail.
+backend/data/
+
+# Generated evidence clips/previews (recreated at runtime, not source).
+backend/media/clips/
+backend/media/previews/
+backend/scenario_clips/
+
+# YOLO weights -- auto-downloaded on first run if not already present
+# locally (see app/detection/person_tracker.py); too large to version.
+backend/weights/*.pt
+yolov8n.pt
+
+# Session/debug logs and one-off local artifacts.
+backend/*.log
+
+# --- Frontend (Node) ---
+node_modules/
+dist/
+*.local
+
+# --- Environment / secrets ---
+.env
+.env.local
+
+# --- Old prototype (superseded by backend/ + frontend/app/) ---
+# Kept on disk for reference, excluded from git: unrelated to the current
+# system, and the top-level weights/ alone is ~87MB of unused model files.
+# Anchored to the repo root (leading /) so these don't accidentally also
+# match same-named directories inside backend/ (e.g. backend/tests/, which
+# holds the real pytest suite, or backend/weights/, which holds the in-use
+# YOLO model).
+/app.py
+/app2.py
+/sample.py
+/modules/
+/survilleance/
+/documentations/
+/weights/
+/logs/
+/tests/
+/PyWhatKit_DB.txt
+frontend/DirectoryManager/
+frontend/LandingPage/
+
+# --- OS / editor ---
+.DS_Store
+.vscode/

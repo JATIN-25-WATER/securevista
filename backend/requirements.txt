@@ -1,0 +1,19 @@
+# Install torch/torchvision FIRST from the CUDA index so ultralytics reuses the CUDA build:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu126
+# Then install the rest:
+#   pip install -r requirements.txt
+fastapi
+uvicorn[standard]
+sqlalchemy
+pydantic
+pydantic-settings
+python-jose[cryptography]
+bcrypt
+cryptography
+opencv-python-headless
+scipy
+numpy
+pytest
+websockets
+python-multipart
+ultralytics

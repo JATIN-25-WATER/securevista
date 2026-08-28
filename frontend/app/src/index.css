@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 90%;
+    --card-hover: 0 0% 10%;
+
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 0 86% 32%;
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 0 86% 42%;
+
+    --secondary: 0 0% 70%;
+    --secondary-foreground: 0 0% 10%;
+
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 62%;
+
+    --accent: 0 0% 16%;
+    --accent-foreground: 0 0% 92%;
+
+    --destructive: 0 84% 55%;
+    --destructive-foreground: 0 0% 98%;
+
+    --success: 142 71% 40%;
+    --success-foreground: 0 0% 98%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 10%;
+
+    --border: 0 0% 22%;
+    --input: 0 0% 16%;
+    --ring: 0 86% 40%;
+
+    --radius: 0.6rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 8px;
+  }
+}
