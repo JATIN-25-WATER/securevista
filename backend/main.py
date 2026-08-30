@@ -21,6 +21,10 @@ from backend.db.seed import seed_database
 from backend.auth.router import router as auth_router
 from backend.cameras.router import router as cameras_router
 from backend.stream.router import router as stream_router
+from backend.zones.router import router as zones_router
+from backend.incidents.router import router as incidents_router
+from backend.evidence.router import router as evidence_router
+from backend.audit.router import router as audit_router
 from backend.pipeline.source_manager import get_source_manager
 from backend.pipeline.pipeline_manager import get_pipeline_manager
 from backend.db.models import Camera
@@ -90,10 +94,10 @@ app.add_middleware(
 app.include_router(auth_router)
 app.include_router(cameras_router)   # Phase 2
 app.include_router(stream_router)    # Phase 2
-# Phase 3+ routers:
-# app.include_router(incidents_router)
-# app.include_router(zones_router)
-# app.include_router(evidence_router)
+app.include_router(zones_router)     # Phase 3
+app.include_router(incidents_router) # Phase 3
+app.include_router(evidence_router)  # Phase 3
+app.include_router(audit_router)     # Phase 3
 
 
 # ── Health check ──────────────────────────────────────────────────────────────

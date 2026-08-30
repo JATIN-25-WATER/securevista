@@ -379,10 +379,17 @@ class DetectionPipeline:
             )
             db.add(obs)
             db.commit()
+            db.refresh(obs)
             logger.debug(
                 "Observation written: cam=%d track=%s event=%s",
                 self.camera_db_id, track_id, event_type,
             )
+            # Auto-create incident if impact is high enough (Phase 3)
+            try:
+                from backend.incidents.correlator import maybe_create_incident
+                maybe_create_incident(db, obs)
+            except Exception as corr_exc:
+                logger.error("Correlator error: %s", corr_exc)
         except Exception as exc:
             logger.error("Failed to write observation: %s", exc)
         finally:
