@@ -28,11 +28,11 @@ docker compose up --build
 
 ## Default Credentials (development only)
 
-| Username | Password | Role |
-|---|---|---|
-| admin | admin123 | admin |
-| operator | op123 | operator |
-| responder | resp123 | responder |
+| Username | Password | 
+|---|---|
+| operator 1 | op123 | 
+| operator 2 | op123 | 
+| operator 3 | op123 | 
 
 > **Change all passwords before any deployment.**
 
